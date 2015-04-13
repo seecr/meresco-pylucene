@@ -34,7 +34,8 @@ class JvmMonitor(Observable):
         maxMem = runtime.maxMemory()
         freeMem = runtime.freeMemory()
         totalMem = runtime.totalMemory()
-
+        unallocatedMem = maxMem - totalMem
+        availableMem = unallocatedMem + freeMem
         self.call.report(values={
                 "Memory": {
                     "JVM Memory": {
@@ -46,7 +47,11 @@ class JvmMonitor(Observable):
                         },
                         "Total": {
                             MEMORY: totalMem
+                        },
+                        "Available": {
+                            MEMORY: availableMem
                         }
+
                     }
                 }
             })
