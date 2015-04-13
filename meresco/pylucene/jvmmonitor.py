@@ -23,24 +23,32 @@
 #
 ## end license ##
 
-from os import getenv
-from lucene import initVM, getVMEnv
-from warnings import warn
+from meresco.core import Observable
+from gustos.common.units import MEMORY
+from java.lang import Runtime
 
-def getJVM():
-    vmargs = [] #['-agentlib:hprof=heap=sites']
-    pyluceneVmargs = getenv('PYLUCENE_VM_ARGS')
-    if pyluceneVmargs:
-        vmargs.extend(pyluceneVmargs.split(','))
-    heapDumpPath = getenv('PYLUCENE_HEAPDUMP_PATH')
-    if heapDumpPath:
-        vmargs.extend(['-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=%s' % heapDumpPath])
-    maxheap = getenv('PYLUCENE_MAXHEAP')
-    if not maxheap:
-        maxheap = '4g'
-        warn("Using '4g' as maxheap for lucene.initVM(). To override use PYLUCENE_MAXHEAP environment variable.")
-    try:
-        return initVM(maxheap=maxheap, vmargs=','.join(vmargs))
-    except ValueError:
-        return getVMEnv()
+class JvmMonitor(Observable):
 
+    def handle(self):
+        runtime = Runtime.getRuntime()
+        maxMem = runtime.maxMemory()
+        freeMem = runtime.freeMemory()
+        totalMem = runtime.totalMemory()
+
+        self.call.report(values={
+                "Memory": {
+                    "JVM Memory": {
+                        "Free": {
+                            MEMORY: freeMem
+                        },
+                        "Max": {
+                            MEMORY: maxMem
+                        },
+                        "Total": {
+                            MEMORY: totalMem
+                        }
+                    }
+                }
+            })
+        return
+        yield
