@@ -1,2 +1,4 @@
 pylucene (>= 4.10.1)
-pylucene (<< 4.11.0)
+pylucene (<< 4.11)
+gustos1.2-common (>= 1.2.44)
+gustos1.2-common (<< 1.3)
