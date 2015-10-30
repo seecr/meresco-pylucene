@@ -24,8 +24,14 @@
 ## end license ##
 
 from meresco.core import Observable
-from gustos.common.units import MEMORY
 from java.lang import Runtime
+
+try:
+    from gustos.common.units import MEMORY
+except ImportError:
+    print "Unable to import gustos.common, please install"
+    exit(1)
+
 
 class JvmMonitor(Observable):
 
