@@ -1,5 +1,5 @@
 pylucene (>= 4.10.1)
 pylucene (<< 4.11)
-centos7: java-1.7.0-openjdk-headless
-jessie: openjdk-7-jre-headless
+#centos7: java-1.7.0-openjdk-headless
+#jessie: openjdk-7-jre-headless
 
