@@ -3,7 +3,7 @@
 # "Meresco PyLucene" contains JVM initialization for pylucene
 #
 # Copyright (C) 2015 Koninklijke Bibliotheek (KB) http://www.kb.nl
-# Copyright (C) 2015 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2015, 2021 Seecr (Seek You Too B.V.) https://seecr.nl
 #
 # This file is part of "Meresco PyLucene"
 #
@@ -29,8 +29,9 @@ from java.lang import Runtime
 try:
     from gustos.common.units import MEMORY
 except ImportError:
-    print "Unable to import gustos.common, please install"
-    exit(1)
+    from warnings import warn
+    warn("Unable to import gustos.common, please install", ImportWarning)
+    MEMORY='memory'
 
 
 class JvmMonitor(Observable):

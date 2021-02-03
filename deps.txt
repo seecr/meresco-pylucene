@@ -1,1 +1,4 @@
-pylucene (>= 6.5.0)
+pylucene-py3 (>= 8.6.1)
+pylucene-py3 (<< 8.7)
+python3-meresco-core (>= 4.1)
+python3-meresco-core (<< 4.2)
