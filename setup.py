@@ -23,7 +23,7 @@
 #
 ## end license ##
 
-version = '$Version: trunk$'[9:-1].strip()
+version = '$Version: 0$'[9:-1].strip()
 name='meresco-pylucene'
 
 from distutils.core import setup
